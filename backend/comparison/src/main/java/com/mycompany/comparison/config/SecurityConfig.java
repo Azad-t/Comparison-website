@@ -30,7 +30,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) // 禁用 CSRF（视需求启用或禁用）
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/api/users/**").permitAll() // 允许未认证用户访问登录和注册接口
+                .requestMatchers("/api/users/**","/api/products/**").permitAll() // 允许未认证用户访问登录和注册接口
                 .anyRequest().authenticated() // 其他请求需要认证
             )
             .httpBasic(httpBasic -> {}); // 使用 Lambda 表达式替代 Customizer

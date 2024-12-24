@@ -13,6 +13,7 @@ public class Product {
     private double price;
     private Date lastUpdated;
     private String imageUrl;
+    private String platform;
 
     // Getters and Setters
     public Long getId() {
@@ -53,5 +54,13 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
     }
 }

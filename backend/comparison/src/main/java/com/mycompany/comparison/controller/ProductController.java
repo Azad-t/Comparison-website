@@ -17,6 +17,8 @@ public class ProductController {
 
     @GetMapping("/search")
     public List<Product> searchProducts(@RequestParam String name) {
+        //输出日志
+        System.out.println("searchProducts: " + name);
         return productService.searchProducts(name);
     }
 

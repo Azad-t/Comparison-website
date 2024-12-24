@@ -13,6 +13,8 @@
   </template>
   
   <script>
+  import api from '@/api/api';
+
   export default {
     data() {
       return {
@@ -23,14 +25,22 @@
       };
     },
     methods: {
-      async handleLogin() {
-        try {
-          // 调用 API 进行登录
-          await this.$store.dispatch('loginUser', this.form);
-          this.$router.push('/dashboard');
-        } catch (error) {
-          alert('登录失败，请重试');
-        }
+       handleLogin() {
+        api.post('/api/users/login',{
+            username: this.form.username,
+            password: this.form.password,}
+        ).then(response => {
+          console.log("response: ", response.data);
+          if (response.data) {
+            this.$message.success('登录成功');
+            this.$router.push('/dashboard');
+          } else {
+            alert('用户名或密码错误');
+          }
+        }).catch(error => {
+          console.log(error);
+          alert('登录失败，请稍后再试');
+        });
       }
     }
   };

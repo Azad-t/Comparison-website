@@ -9,7 +9,7 @@
   </template>
   
   <script>
-  import { getProductDetails } from '@/api/product';
+  import { getProductDetails } from '@/api/api';
   import PriceHistoryChart from '@/components/PriceHistoryChart.vue';
   
   export default {

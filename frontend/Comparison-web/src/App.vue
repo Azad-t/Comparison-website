@@ -1,41 +1,34 @@
 <template>
   <div id="app" :class="{ 'auth-background': isAuthPage }">
-    <header v-if="!isAuthPage">
-      <div class="logo">Comparison Site</div>
-      <div class="search-bar">
-        <input type="text" placeholder="搜索商品..." />
-        <button>搜索</button>
-      </div>
-      <nav>
-        <router-link to="/">首页</router-link>
-        <router-link to="/dashboard">操作面板</router-link>
-        <router-link to="/login">登录</router-link>
-        <router-link to="/register">注册</router-link>
-      </nav>
-    </header>
-    <aside class="sidebar" v-if="!isAuthPage">
-      <h3>分类导航</h3>
-      <ul>
-        <li><a href="#">电子产品</a></li>
-        <li><a href="#">家居用品</a></li>
-        <li><a href="#">服装配饰</a></li>
-        <li><a href="#">运动户外</a></li>
-      </ul>
-    </aside>
-    <main>
-      <router-view />
-      <section v-if="!isAuthPage" class="featured-products">
-        <h2>推荐商品</h2>
-        <div class="product-grid">
-          <div class="product-card" v-for="n in 12" :key="n">
-            <img src="https://via.placeholder.com/150" alt="商品图片" />
-            <h3>商品名称 {{ n }}</h3>
-            <p>￥价格</p>
-            <button>加入购物车</button>
+    <el-container>
+      <el-header v-if="!isAuthPage" class="custom-header">
+        <div class="logo">Comparison Site</div>
+        <el-input placeholder="搜索商品..." class="search-bar" clearable></el-input>
+        <el-button type="primary" >搜索</el-button>
+        <nav class="nav-links">
+          <router-link to="/">首页</router-link>
+          <router-link to="/pricehistory">历史价格</router-link>
+          <router-link to="/login">登录</router-link>
+          <router-link to="/register">注册</router-link>
+          <router-link to="/product/:id">商品详情</router-link>
+        </nav>
+      </el-header>
+
+      <el-main>
+        <router-view />
+        <section v-if="!isAuthPage" class="featured-products">
+          <h2>推荐商品</h2>
+          <div class="product-grid">
+            <el-card v-for="n in 12" :key="n" class="product-card" shadow="hover">
+              <img src="https://via.placeholder.com/200" alt="商品图片" />
+              <h3>商品名称 {{ n }}</h3>
+              <p>￥价格</p>
+              <el-button type="success">加入购物车</el-button>
+            </el-card>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -53,118 +46,68 @@ export default {
 <style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  display: grid;
-  grid-template-areas: "header header" "sidebar main";
-  grid-template-columns: 250px 1fr;
-  background-image: url('https://s21.ax1x.com/2024/11/14/pAg74U0.png');
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /*background-image: url('https://s21.ax1x.com/2024/11/14/pAg74U0.png');*/
+
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(5px);
+  background-color: rgba(231, 238, 207, 0.288);
 }
 
 .auth-background {
-  background-image: url('https://s21.ax1x.com/2024/11/14/pAg74U0.png');
+  /*background-image: url('https://s21.ax1x.com/2024/11/14/pAg74U0.png')；*/
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(5px);
+  background-color: rgba(236, 247, 245, 0.925);
 }
 
-header {
-  grid-area: header;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f5f5f5;
+.custom-header {
+  background-color: #faf0f085;
   padding: 10px 20px;
-  border-bottom: 2px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
 }
 
 .logo {
-  font-size: 24px;
+
+  font-size: 28px;
   font-weight: bold;
 }
 
 .search-bar {
+  margin-right: 10px;
+  width: 300px;
+}
+
+.nav-links {
   display: flex;
-}
-
-.search-bar input {
-  padding: 5px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.search-bar button {
-  margin-left: 5px;
-  padding: 5px 10px;
-  background-color: #42b983;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-nav {
-  display: flex;
-  gap: 20px;
-}
-
-.sidebar {
-  grid-area: sidebar;
-  background-color: #eaeaea;
-  padding: 20px;
-  border-right: 2px solid #ddd;
-}
-
-.sidebar h3 {
-  margin-bottom: 10px;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar li {
-  margin-bottom: 10px;
-}
-
-.sidebar a {
-  text-decoration: none;
-  color: #2c3e50;
-}
-
-main {
-  grid-area: main;
-  padding: 20px;
+  gap: 15px;
 }
 
 .featured-products {
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
 .product-card {
-  border: 1px solid #ddd;
-  padding: 10px;
   text-align: center;
+  padding: 10px;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .product-card img {
@@ -172,24 +115,11 @@ main {
   border-radius: 4px;
 }
 
-.product-card button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  background-color: #42b983;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 @media screen and (max-width: 768px) {
-  #app {
-    grid-template-columns: 1fr;
-    grid-template-areas: "header" "main";
+  .search-bar {
+    width: 200px;
   }
-  .sidebar {
-    display: none;
-  }
+
   .product-grid {
     grid-template-columns: 1fr;
   }

@@ -11,7 +11,7 @@
   </template>
   
   <script>
-  import { searchProducts } from '@/api/product';
+  import { searchProducts } from '@/api/api';
   export default {
     data() {
       return {

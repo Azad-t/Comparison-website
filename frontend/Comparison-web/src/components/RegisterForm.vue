@@ -14,6 +14,9 @@
         <input v-model="form.password" type="password" id="password" required minlength="6" />
       </div>
       <button type="submit">注册</button>
+      <nav class="nav-links">
+          <router-link to="/login">已有账号？ 登录</router-link>
+        </nav>
       </div>
       
     </form>

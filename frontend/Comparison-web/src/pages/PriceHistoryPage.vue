@@ -1,5 +1,6 @@
 <template>
     <div class="history-page">
+      <router-link to="/dashboard">首页</router-link>
       <h2>商品历史价格</h2>
       <el-table :data="priceHistory" style="width: 100%">
         <el-table-column prop="id" label="ID" width="100"></el-table-column>

@@ -4,7 +4,7 @@
           <el-input placeholder="请输入商品名..." v-model="searchquery" class="search-bar" clearable></el-input>
           <el-button type="primary" @click="handleSearch" class="search-btn">搜索</el-button>
           <nav class="nav-links">
-          <router-link to="/">首页</router-link>
+          <router-link to="/dashboard">首页</router-link>
         </nav>
         </el-header>
     
@@ -15,6 +15,7 @@
               <p>￥价格 {{ items.price }}</p>
               <p>来源 {{ items.platform }}</p>
               <el-button type="success">加入购物车</el-button>
+              <el-button type="text" @click="goToDetail(items.fromUrl)">查看详情</el-button>
             </el-card>
           </div>
     </el-container>      
@@ -37,14 +38,17 @@
     methods: {
   async handleSearch() {
     try {
-      const response = await api.get(`/api/products/search?name=${this.searchquery}`);
+      const response = await api.get(`/api/products/scrape?name=${this.searchquery}`);
       this.searchResults = response.data;
       // console.log('搜索成功： ', response);
       // console.log('搜索成功： ', response.data);
-      // console.log('搜索结果： ', this.searchResults);
+       console.log('搜索结果： ', this.searchResults);
     } catch (error) {
       console.log('搜索失败： ', error);
     }
+  },
+  goToDetail(url) {
+    window.open(url, '_blank');
   }
 },
 watch: {

@@ -15,6 +15,8 @@ public class Product {
     private String imageUrl;
     private String platform;
 
+    @Lob
+    private String fromUrl;
     // Getters and Setters
     public Long getId() {
         return id;
@@ -62,5 +64,13 @@ public class Product {
 
     public void setPlatform(String platform) {
         this.platform = platform;
+    }
+
+    public String getFromUrl() {
+        return fromUrl;
+    }
+
+    public void setFromUrl(String fromUrl) {
+        this.fromUrl = fromUrl;
     }
 }

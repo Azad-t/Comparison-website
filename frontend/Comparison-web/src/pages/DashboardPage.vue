@@ -6,12 +6,9 @@
         <el-input placeholder="搜索商品..." v-model="searchquery" class="search-bar" clearable></el-input>
         <el-button type="primary" @click="handleSearch">搜索</el-button>
         <nav class="nav-links">
-          <router-link to="/">首页</router-link>
           <router-link to="/pricehistory">历史价格</router-link>
           <router-link to="/login">登录</router-link>
           <router-link to="/register">注册</router-link>
-          <router-link to="/product/:id">商品详情</router-link>
-          <router-link to="/search">搜索</router-link>
         </nav>
       </el-header>
 

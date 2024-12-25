@@ -9,6 +9,7 @@
         <input v-model="form.password" type="password" id="password" required minlength="6" />
       </div>
       <button type="submit">登录</button>
+      <el-button type="primary" @click="goToRegister">还没有账号？注册</el-button>
     </form>
   </template>
   
@@ -41,6 +42,10 @@
           console.log(error);
           alert('登录失败，请稍后再试');
         });
+      },
+      goToRegister() {
+        // 这里可以配置具体的路由跳转逻辑，假设后续注册页面的路由名为'register'
+        this.$router.push('/register');
       }
     }
   };

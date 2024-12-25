@@ -22,10 +22,12 @@ public class ProductController {
         return productService.searchProducts(name);
     }
 
-    @GetMapping("/fetch-price")
-    public Product fetchPrice(@RequestParam String url) {
+    @GetMapping("/scrape")
+    public List<Product> scrapeProducts(@RequestParam String name) {
         try {
-            return productService.fetchPriceFromPlatform(url);
+            // 输出日志
+            System.out.println("scrapeProducts: " + name);
+            return productService.scrapeProductsByName(name);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

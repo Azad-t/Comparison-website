@@ -79,7 +79,12 @@ watch: {
   border-radius: 8px;
   overflow: hidden;
 }
-
+.product-card img {
+  width: 100%; /* 使图像宽度适应容器 */
+  height: auto; /* 保持图像的纵横比 */
+  object-fit: cover; /* 确保图像覆盖整个容器，可能会裁剪 */
+  display: block; /* 去除图像下方的空白空间 */
+}
 .custom-header {
   background-color: #faf0f085;
   padding: 10px 20px;

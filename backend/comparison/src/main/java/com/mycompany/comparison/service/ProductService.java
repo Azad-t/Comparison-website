@@ -35,14 +35,14 @@ public class ProductService {
         options.addArguments("--no-sandbox");
 
         WebDriver driver = new ChromeDriver(options);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         List<Product> productList = new ArrayList<>();
 
         try {
             // 京东爬取
             productList.addAll(scrapeFromJD(driver, wait, productName));
             // 淘宝爬取
-            //productList.addAll(scrapeFromTaobao(driver, wait, productName));
+            productList.addAll(scrapeFromTaobao(driver, wait, productName));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -65,7 +65,7 @@ public class ProductService {
             
             // 等待页面加载完成
             Thread.sleep(5000); // 可根据需要调整
-            TimeUnit.SECONDS.sleep(50); // 等待页面加载，最好用显式等待
+            TimeUnit.SECONDS.sleep(35); // 等待页面加载，最好用显式等待
     
             System.out.println("开始获取数据");
             
@@ -75,7 +75,11 @@ public class ProductService {
             // 根据商品的外部结构提取商品信息
             Elements productElements = doc.select(".gl-i-wrap");
     
+            int maxresults = 12;
+            int count = 0;
+            
             for (var productElement : productElements) {
+                if(count > maxresults) break;
                 // 获取商品名称
                 String name = productElement.select(".p-name a em").text();
                 
@@ -113,8 +117,9 @@ public class ProductService {
                 products.add(product);
     
                 // 保存到数据库
-                productRepository.save(product);
+               // productRepository.save(product);
                 System.out.println("Saved product: " + name);
+                count++;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,7 +137,7 @@ public class ProductService {
             searchInput.sendKeys(productName);
             searchButton.click();
             Thread.sleep(5000); // 等待页面加载
-            TimeUnit.SECONDS.sleep(50); // 可根据实际需求调整等待时间
+            TimeUnit.SECONDS.sleep(35); // 可根据实际需求调整等待时间
             System.out.println("开始获取淘宝数据");
     
             Document doc = Jsoup.parse(driver.getPageSource());
@@ -166,7 +171,7 @@ public class ProductService {
                     products.add(product);
     
                     // 保存到数据库
-                    productRepository.save(product);
+                  //  productRepository.save(product);
                     System.out.println("Saved product: " + name);
                     count++;
                 } catch (Exception e) {

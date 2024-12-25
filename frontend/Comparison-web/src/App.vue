@@ -1,7 +1,10 @@
 <template>
-  <div id="app" :class="{ 'auth-background': isAuthPage }">
+  <div id="app" :class="auth-background">
     <el-container>
       <el-main>
+        <nav class="nav-links">
+          <router-link to="/">Home</router-link>
+        </nav>
   <router-view></router-view>
 </el-main>
     </el-container>

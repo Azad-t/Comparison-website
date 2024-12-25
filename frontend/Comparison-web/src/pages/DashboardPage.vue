@@ -1,20 +1,23 @@
 <template>
-  <div id="dashboard" :class="{ 'auth-background': isAuthPage }">
+  <div id="dashboard" :class="auth-background">
     <el-container>
-      <el-header v-if="!isAuthPage" class="custom-header">
+      <el-header  class="custom-header">
         <div class="logo">Comparison Site</div>
         <el-input placeholder="搜索商品..." v-model="searchquery" class="search-bar" clearable></el-input>
         <el-button type="primary" @click="handleSearch">搜索</el-button>
         <nav class="nav-links">
           <router-link to="/pricehistory">历史价格</router-link>
-          <router-link to="/login">登录</router-link>
-          <router-link to="/register">注册</router-link>
+          <!-- <router-link to="/login">登录</router-link>
+          <router-link to="/register">注册</router-link> -->
+          <router-link to="/profile">个人中心</router-link>
         </nav>
+        <el-button type="danger" @click="handleLogout">登出</el-button>
+
       </el-header>
 
       <el-main>
         <router-view />
-        <section v-if="!isAuthPage" class="featured-products">
+        <section  class="featured-products">
           <h2>推荐商品</h2>
           <div class="product-grid">
             <el-card v-for="n in 12" :key="n" class="product-card" shadow="hover">
@@ -34,11 +37,11 @@
 import api from '@/api/api';
 export default {
   name: 'dashboard-page',
-  computed: {
-    isAuthPage() {
-      return this.$route.path === '/login' || this.$route.path === '/register';
-    }
-  },
+  // computed: {
+  //   isAuthPage() {
+  //     return this.$route.path === '/login' || this.$route.path === '/register';
+  //   }
+  // },
   data() {
     return {
       searchquery: '',
@@ -49,7 +52,12 @@ export default {
     handleSearch() {
     // 使用 this.$router.push 跳转到搜索页面，并带上搜索关键词作为参数
     this.$router.push({ path: '/search', query: { query: this.searchquery } });
-  }
+  },
+  handleLogout() {
+    localStorage.removeItem('authToken'); // 清除登录状态
+    this.$router.push('/login');
+    this.$message.success('已登出');
+  },
   }
 };
 </script>

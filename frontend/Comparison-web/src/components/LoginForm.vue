@@ -33,8 +33,10 @@
         ).then(response => {
           console.log("response: ", response.data);
           if (response.data) {
+            localStorage.setItem('userprofile', JSON.stringify(response.data)); // 保存登录状态
+            console.log("localStorage: ", localStorage.getItem('userprofile'));
             this.$message.success('登录成功');
-            this.$router.push('/dashboard');
+                this.$router.push('/dashboard');
           } else {
             alert('用户名或密码错误');
           }

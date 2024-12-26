@@ -117,7 +117,7 @@ public class ProductService {
                 products.add(product);
     
                 // 保存到数据库
-               // productRepository.save(product);
+                productRepository.save(product);
                 System.out.println("Saved product: " + name);
                 count++;
             }
@@ -171,7 +171,7 @@ public class ProductService {
                     products.add(product);
     
                     // 保存到数据库
-                  //  productRepository.save(product);
+                    productRepository.save(product);
                     System.out.println("Saved product: " + name);
                     count++;
                 } catch (Exception e) {

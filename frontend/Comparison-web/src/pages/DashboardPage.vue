@@ -10,6 +10,7 @@
           <!-- <router-link to="/login">登录</router-link>
           <router-link to="/register">注册</router-link> -->
           <router-link to="/profile">个人中心</router-link>
+          <router-link to="/cart">购物车</router-link>
         </nav>
         <el-button type="danger" @click="handleLogout">登出</el-button>
 

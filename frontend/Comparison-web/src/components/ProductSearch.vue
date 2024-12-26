@@ -14,7 +14,7 @@
               <h3>商品名称 {{ items.name }}</h3>
               <p>￥价格 {{ items.price }}</p>
               <p>来源 {{ items.platform }}</p>
-              <el-button type="success">加入购物车</el-button>
+              <el-button type="success" @click="addToCart(items.id)">加入购物车</el-button>
               <el-button type="text" @click="goToDetail(items.fromUrl)">查看详情</el-button>
             </el-card>
           </div>
@@ -27,7 +27,13 @@
     data() {
       return {
         searchquery: '',
-        searchResults: []
+        searchResults: [],
+        userInfo: {
+                id: '',
+                username: '',
+                password: '',
+                email: '',
+            }
       };
     },
     created() {
@@ -38,7 +44,7 @@
     methods: {
   async handleSearch() {
     try {
-      const response = await api.get(`/api/products/scrape?name=${this.searchquery}`);
+      const response = await api.get(`/api/products/search?name=${this.searchquery}`);
       this.searchResults = response.data;
       // console.log('搜索成功： ', response);
       // console.log('搜索成功： ', response.data);
@@ -49,6 +55,18 @@
   },
   goToDetail(url) {
     window.open(url, '_blank');
+  },
+  async addToCart(productId) {
+    try {
+      console.log('添加到购物车：', productId);
+      const token = localStorage.getItem('userprofile');
+      const parsedToken = JSON.parse(token);
+      this.userInfo = parsedToken;
+      await api.post('/api/cart', {userId: this.userInfo.id, productId});
+      this.$router.push('/cart'); // 跳转至购物车页面
+    } catch (error) {
+      console.error('添加到购物车失败：', error);
+    }
   }
 },
 watch: {

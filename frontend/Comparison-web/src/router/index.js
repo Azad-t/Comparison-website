@@ -6,7 +6,7 @@ import PriceHistoryPage from '@/pages/PriceHistoryPage.vue';
 import ProductSearch from '@/pages/ProductSearchPage.vue';
 import WelcomPage from '@/pages/WelcomPage.vue';
 import Profile from '@/pages/Profile.vue';
-
+import CartPage from '@/pages/CartPage.vue';
 // 路由定义
 const routes = [
   { path: '/register', component: RegisterPage },
@@ -32,6 +32,11 @@ const routes = [
     meta: { requiresAuth: true } // 需要登录
   },
   { path: '/', component: WelcomPage },
+  { 
+    path: '/cart', 
+    component: CartPage, 
+    meta: { requiresAuth: true } // 需要登录
+  },
 ];
 
 // 创建路由实例

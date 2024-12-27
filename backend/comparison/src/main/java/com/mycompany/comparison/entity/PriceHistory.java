@@ -11,10 +11,14 @@ public class PriceHistory {
     private Long id;
 
     private Long productId; // 关联的商品ID
-    private double price;
+
+    @Lob
+    private String productUrl; // 商品 URL
+
+    private double price; // 价格
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date timestamp;
+    private Date timestamp; // 时间戳
 
     // Getters and Setters
     public Long getId() {
@@ -31,6 +35,14 @@ public class PriceHistory {
 
     public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    public String getProductUrl() {
+        return productUrl;
+    }
+
+    public void setProductUrl(String productUrl) {
+        this.productUrl = productUrl;
     }
 
     public double getPrice() {

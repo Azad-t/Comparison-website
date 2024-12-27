@@ -19,7 +19,7 @@
             </div>
             <el-button type="text" @click="goToDetail(item.product.fromUrl)">查看详情</el-button>
             <el-button type="danger" @click="removeFromCart(item.id)">移除</el-button>
-            <el-button type="text" >历史价格</el-button>
+            <el-button type="text" @click="viewPriceHistory(item.product.id)" >历史价格</el-button>
           </el-card>
         </div>
   
@@ -76,10 +76,16 @@
             console.error('移除失败：', error);
         }
     },
-    goToDetail(url) {
-      console.log('跳转到商品详情页：', url);
-    window.open(url, '_blank');
-  },
+      goToDetail(url) {
+        console.log('跳转到商品详情页：', url);
+        window.open(url, '_blank');
+      },
+      viewPriceHistory(productId) {
+        this.$router.push({
+          path: '/pricehistory',
+          query: { productId }
+        });
+      }
     }
   };
   </script>

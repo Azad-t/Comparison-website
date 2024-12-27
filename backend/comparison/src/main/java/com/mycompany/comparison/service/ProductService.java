@@ -26,6 +26,9 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository; // 注入 Repository 实例
 
+    @Autowired
+    private PriceHistoryService priceHistoryService;
+
     public List<Product> scrapeProductsByName(String productName) {
         // ChromeDriver 设置
         System.setProperty("webdriver.chrome.driver", "E:\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe"); // 修改为你的路径
@@ -120,6 +123,12 @@ public class ProductService {
                 productRepository.save(product);
                 System.out.println("Saved product: " + name);
                 count++;
+                // 更新价格历史
+                priceHistoryService.addPriceHistory(
+                    product.getId(),
+                    product.getFromUrl(),
+                    product.getPrice()
+                );
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,6 +183,12 @@ public class ProductService {
                     productRepository.save(product);
                     System.out.println("Saved product: " + name);
                     count++;
+                    // 更新价格历史
+                    priceHistoryService.addPriceHistory(
+                        product.getId(),
+                        product.getFromUrl(),
+                        product.getPrice()
+                    );
                 } catch (Exception e) {
                     System.err.println("Error processing a product element: " + e.getMessage());
                 }

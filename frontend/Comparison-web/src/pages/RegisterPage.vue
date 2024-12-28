@@ -16,10 +16,8 @@
   
   <style scoped>
   .register-container {
-    background-color: rgb(243, 243, 243);
     display: flex;
     justify-content: center;
-    height: 100vh;
-    align-items: center;
+    padding: 20px;
   }
   </style>

@@ -124,4 +124,10 @@ watch: {
   cursor: pointer;
   margin-left: 0px;
 }
+.nav-links {
+  display: flex;
+  gap: 20px;
+  margin-right: 10px;
+}
+
   </style>

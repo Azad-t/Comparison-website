@@ -2,14 +2,14 @@
   <div id="app" :class="auth-background">
     <el-container>
       <el-main>
-        <nav class="nav-links">
+        <!-- <nav class="nav-links">
           <router-link to="/">Home</router-link>
-        </nav>
+        </nav> -->
   <router-view></router-view>
 </el-main>
     </el-container>
     <el-footer style="text-align: center; margin-top: 20px;">
-        <p align="center" class="text-muted">© 2024 Comparison Website</p>
+        <p align="center" class="text-muted">© 2024 B/S Comparison Website ZJH</p>
     </el-footer>
   </div>
 </template>

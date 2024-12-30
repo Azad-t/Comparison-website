@@ -9,7 +9,7 @@
           <el-button type="primary" @click="handleSearch" class="search-button">搜索</el-button>
         </div>
         <nav class="nav-links">
-          <router-link to="/pricehistory" class="nav-link">历史价格</router-link>
+          <!-- <router-link to="/pricehistory" class="nav-link">历史价格</router-link> -->
           <router-link to="/profile" class="nav-link">个人中心</router-link>
           <router-link to="/cart" class="nav-link">购物车</router-link>
         </nav>
